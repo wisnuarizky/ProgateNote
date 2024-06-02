@@ -3,10 +3,10 @@ import Home from './src/screens/home';
 import AddNote from './src/screens/addNote';
 import EditNote from './src/screens/editNote';
 
-const CurrentPageWidget = ({ currentPage, noteList, setCurrentPage, addNote }) => {
+const CurrentPageWidget = ({ currentPage, noteList, setCurrentPage, addNote, handleDelete }) => {
   switch (currentPage) {
     case 'home':
-      return <Home noteList={noteList} setCurrentPage={setCurrentPage} />;
+      return <Home noteList={noteList} setCurrentPage={setCurrentPage} handleDelete={handleDelete} />;
     case 'add':
       return <AddNote setCurrentPage={setCurrentPage} addNote={addNote} />;
     case 'edit':
@@ -23,7 +23,7 @@ const App = () => {
     {
       id: 1,
       title: 'Note pertama',
-      desc: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry',
+      desc: 'Lorem Ipsum adalah teks tiruan dari industri percetakan dan penataan huruf. Lorem Ipsum telah menjadi standar industri',
     },
   ]);
 
@@ -40,7 +40,11 @@ const App = () => {
     ]);
   };
 
-  return <CurrentPageWidget currentPage={currentPage} setCurrentPage={setCurrentPage} noteList={noteList} addNote={addNote} />;
+  const handleDelete = (id) => {
+    setNoteList(noteList.filter((note) => note.id !== id));
+  };
+
+  return <CurrentPageWidget currentPage={currentPage} setCurrentPage={setCurrentPage} noteList={noteList} addNote={addNote} handleDelete={handleDelete} />;
 };
 
 export default App;
