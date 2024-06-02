@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const NoteCard = ({ item, setCurrentPage }) => (
+const NoteCard = ({ item, setCurrentPage, handleDelete }) => (
   <View style={styles.card}>
     <Text style={styles.cardTitle}>{item.title}</Text>
     <Text>{item.desc}</Text>
@@ -44,13 +44,21 @@ const NoteCard = ({ item, setCurrentPage }) => (
           setCurrentPage('edit');
         }}
       />
-      <CustomButton backgroundColor="#D82148" color="#fff" text="Hapus" fontSize={12} width={100} onPress={() => {}} />
+      <CustomButton
+        backgroundColor="#D82148"
+        color="#fff"
+        text="Hapus"
+        fontSize={12}
+        width={100}
+        onPress={() => {
+          handleDelete(item.id);
+        }}
+      />
     </View>
   </View>
 );
 
-// Tambahkan "setCurrentPage" sebagai sebuah prop
-const Home = ({ noteList, setCurrentPage }) => (
+const Home = ({ noteList, setCurrentPage, handleDelete }) => (
   <View style={styles.container}>
     <CustomButton
       backgroundColor="#DDD"
@@ -61,7 +69,7 @@ const Home = ({ noteList, setCurrentPage }) => (
         setCurrentPage('add');
       }}
     />
-    <FlatList showsVerticalScrollIndicator={false} data={noteList} renderItem={({ item }) => <NoteCard item={item} setCurrentPage={setCurrentPage} />} keyExtractor={(item) => item.id} />
+    <FlatList showsVerticalScrollIndicator={false} data={noteList} renderItem={({ item }) => <NoteCard item={item} setCurrentPage={setCurrentPage} handleDelete={handleDelete} />} keyExtractor={(item) => item.id.toString()} />
   </View>
 );
 
