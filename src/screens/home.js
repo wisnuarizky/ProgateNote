@@ -40,7 +40,6 @@ const NoteCard = ({ item, setCurrentPage }) => (
         text="Ubah"
         fontSize={12}
         width={100}
-        // Tuliskan layar "edit" untuk ketika tombol-nya ditekan
         onPress={() => {
           setCurrentPage('edit');
         }}
@@ -58,18 +57,11 @@ const Home = ({ noteList, setCurrentPage }) => (
       color="#203239"
       text="Tambahkan Note"
       width="100%"
-      // Tuliskan layar "add" untuk ketika tombol-nya ditekan
       onPress={() => {
         setCurrentPage('add');
       }}
     />
-    <FlatList
-      showsVerticalScrollIndicator={false}
-      data={noteList}
-      // Berikan function "setCurrentPage" ke component "NoteCard"
-      renderItem={({ item }) => <NoteCard item={item} setCurrentPage={setCurrentPage} />}
-      keyExtractor={(item) => item.id}
-    />
+    <FlatList showsVerticalScrollIndicator={false} data={noteList} renderItem={({ item }) => <NoteCard item={item} setCurrentPage={setCurrentPage} />} keyExtractor={(item) => item.id} />
   </View>
 );
 
